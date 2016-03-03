@@ -1,6 +1,6 @@
 package cz.mamuf.test.paymenttracker.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,8 +11,8 @@ import com.google.common.collect.Lists;
 @Test
 public class CurrencyTest {
 
-	private ArrayList<String> validCurrencies;
-	private ArrayList<String> invalidCurrencies;
+	private List<String> validCurrencies;
+	private List<String> invalidCurrencies;
 
 	@BeforeMethod
 	public void beforeMethod() {
