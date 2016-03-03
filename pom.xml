@@ -6,6 +6,12 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>payment-tracker</name>
 	<url></url>
+
+	<properties>
+		<jdk.version>1.8</jdk.version>
+		<sourceEncoding>UTF-8</sourceEncoding>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -13,10 +19,49 @@
 			<version>6.9.10</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Java version -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Resource encoding -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<encoding>${sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- JAR -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
