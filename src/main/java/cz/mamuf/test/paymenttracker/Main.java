@@ -1,20 +1,21 @@
 package cz.mamuf.test.paymenttracker;
 
-import java.util.Scanner;
+import java.io.File;
 
 /**
  * Main class.
  */
 public class Main {
 	public static void main(final String[] args) {
-		System.out.println("Payment Tracker");
-
-		final Scanner sc = new Scanner(System.in);
-		sc.useDelimiter("\\s*");
-		while (!sc.hasNext("z")) {
-			final char ch = sc.next().charAt(0);
-			System.out.print("[" + ch + "] ");
+		String filename = null;
+		if (args.length >= 1) {
+			filename = args[0];
 		}
-		sc.close();
+
+		final PaymentTracker paymentTracker = filename != null
+				? new PaymentTracker(new PaymentStore(new File(filename)))
+				: new PaymentTracker();
+
+		paymentTracker.run();
 	}
 }

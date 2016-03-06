@@ -49,6 +49,14 @@ public class PaymentTracker {
 		}
 	}
 
+	public PaymentRegistry getModel() {
+		return model;
+	}
+
+	public void run() {
+		ui.open();
+	}
+
 	private PaymentRegistry createModel() throws IOException {
 		final PaymentRegistry result = new PaymentRegistry(loadAllPayments());
 		result.addListener(new PaymentRegistryListener() {
@@ -75,9 +83,4 @@ public class PaymentTracker {
 			}
 		});
 	}
-
-	public PaymentRegistry getModel() {
-		return model;
-	}
-
 }

@@ -13,4 +13,8 @@ public class ConsoleUI {
 		this.model = model;
 	}
 
+	public void open() {
+
+	}
+
 }
