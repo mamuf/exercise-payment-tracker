@@ -21,4 +21,9 @@ public class Payment {
 		return currency;
 	}
 
+	@Override
+	public String toString() {
+		return currency + " " + value;
+	}
+
 }

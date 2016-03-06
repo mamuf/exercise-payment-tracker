@@ -1,7 +1,8 @@
 package cz.mamuf.test.paymenttracker.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,15 +78,11 @@ public class PaymentRegistry {
 	 * @return Totals mapped by {@link Currency}.
 	 */
 	public Map<Currency, Integer> getTotalsByCurrencies() {
-		/*
-		 * map values by Currency and merge the values by adding them up,
-		 * effectively calculating the totals
-		 */
-		return payments.stream().collect(toMap(
-				Payment::getCurrency,
-				Payment::getValue,
-				(a, b) -> a + b,
-				TreeMap::new));
+		return payments.stream()
+				.collect(groupingBy(
+						Payment::getCurrency,
+						TreeMap::new,
+						summingInt(Payment::getValue)));
 	}
 
 }

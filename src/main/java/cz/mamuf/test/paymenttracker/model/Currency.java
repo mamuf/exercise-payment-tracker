@@ -26,6 +26,11 @@ public class Currency implements Comparable<Currency> {
 	}
 
 	@Override
+	public String toString() {
+		return currency;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
