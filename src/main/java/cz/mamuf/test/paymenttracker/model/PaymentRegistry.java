@@ -1,8 +1,10 @@
 package cz.mamuf.test.paymenttracker.model;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -25,6 +27,21 @@ public class PaymentRegistry {
 		 * Executed at the end of {@link PaymentRegistry#add(Payment)} method.
 		 */
 		void paymentAdded(Payment payment);
+	}
+
+	/**
+	 * Creates emtpy registry.
+	 */
+	public PaymentRegistry() {
+	}
+
+	/**
+	 * Creates registry with initial collection of {@link Payment}s.
+	 *
+	 * @param initialPayments
+	 */
+	public PaymentRegistry(final Collection<Payment> initialPayments) {
+		payments.addAll(checkNotNull(initialPayments, "initialPayments"));
 	}
 
 	/**

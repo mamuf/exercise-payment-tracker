@@ -6,12 +6,29 @@ import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
+
 import cz.mamuf.test.paymenttracker.model.PaymentRegistry.PaymentRegistryListener;
 
 public class PaymentRegistryTest {
 
 	private final Currency USD = new Currency("USD");
 	private final Currency CZK = new Currency("CZK");
+
+	@Test
+	public void testConstructWithInitalPayments() {
+		final Payment p1 = new Payment(USD, 1);
+
+		final PaymentRegistry reg = new PaymentRegistry(Lists.newArrayList(p1));
+
+		Assert.assertEquals(reg.getTotalByCurrency(USD), p1.getValue());
+	}
+
+	@Test(expectedExceptions = NullPointerException.class)
+	@SuppressWarnings("unused")
+	public void testConstructWithInitalPaymentsNull() {
+		new PaymentRegistry(null);
+	}
 
 	@Test
 	public void testAdd() {

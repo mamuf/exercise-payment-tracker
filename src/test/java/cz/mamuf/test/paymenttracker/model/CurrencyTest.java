@@ -57,4 +57,11 @@ public class CurrencyTest {
 			Assert.assertEquals(new Currency(c).hashCode(), new Currency(c).hashCode());
 		});
 	}
+
+	@Test
+	public void testComparable() {
+		Assert.assertEquals(new Currency("CZK").compareTo(new Currency("CZK")), 0, "currencies not equal");
+		Assert.assertTrue(new Currency("AAA").compareTo(new Currency("ZZZ")) < 0, "AAA must be less than ZZZ");
+		Assert.assertTrue(new Currency("ZZZ").compareTo(new Currency("AAA")) > 0, "ZZZ must be more than AAA");
+	}
 }

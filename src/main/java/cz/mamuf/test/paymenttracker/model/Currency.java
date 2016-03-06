@@ -3,7 +3,7 @@ package cz.mamuf.test.paymenttracker.model;
 /**
  * {@link Payment} currency.
  */
-public class Currency {
+public class Currency implements Comparable<Currency> {
 
 	private final String currency;
 
@@ -53,6 +53,11 @@ public class Currency {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(final Currency o) {
+		return currency.compareTo(o.currency);
 	}
 
 }
