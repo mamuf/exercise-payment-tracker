@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 
-@Test
 public class CurrencyTest {
 
 	private List<String> validCurrencies;
@@ -37,6 +36,25 @@ public class CurrencyTest {
 	public void testGetCurrency() {
 		validCurrencies.forEach(currency -> {
 			Assert.assertEquals(new Currency(currency).getCurrency(), currency);
+		});
+	}
+
+	@Test
+	public void testEquals() {
+		validCurrencies.forEach(c -> {
+			Assert.assertEquals(new Currency(c), new Currency(c));
+		});
+	}
+
+	@Test
+	public void testNotEquals() {
+		Assert.assertNotEquals(new Currency("CZK"), new Currency("USD"));
+	}
+
+	@Test
+	public void testHashCode() {
+		validCurrencies.forEach(c -> {
+			Assert.assertEquals(new Currency(c).hashCode(), new Currency(c).hashCode());
 		});
 	}
 }
