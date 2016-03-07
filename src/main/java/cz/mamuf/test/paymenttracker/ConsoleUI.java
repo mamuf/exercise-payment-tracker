@@ -58,7 +58,7 @@ public class ConsoleUI {
 	}
 
 	private void printInputPrompt() {
-		System.out.print("Enter payment [CCC value] or 'quit': ");
+		System.out.print("Enter payment ([CCC value]) or 'quit': ");
 	}
 
 	private void handleInput(final String input) {

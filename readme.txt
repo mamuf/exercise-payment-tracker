@@ -6,6 +6,26 @@ Spuštění programu
 $ mvn clean package
 $ java -cp "target/payment-tracker.jar:target/dependency/*" cz.mamuf.test.paymenttracker.Main
 
+nebo pro načtení/zápis do souboru:
+
+$ java -cp "target/payment-tracker.jar:target/dependency/*" cz.mamuf.test.paymenttracker.Main [cesta k souboru]
+
+
+Používání
+---------
+Program dle zadání očekává vstup '<CCC> <value>', kde <CCC> je měna a <value> 
+částka, nebo 'quit' pro ukončení.
+
+
+Ošetření vstupů a chyb
+----------------------
+ - Zadá-li uživatel neplatný vstup, program jej na to upozorní a vyzve jej
+	k novému zadání.
+ - Chyby přístupu k souborům nejsou ošetřeny. 
+ - Pokud zadaný soubor neexistuje, je vytvořen po zadání první platby. 
+ - Pokud již existuje, načtou se stávající záznamy. 
+ - Pokud je stávající formát souboru neplatný, program skončí s výjimkou.
+
 
 Poznámky ke kódu
 ----------------
