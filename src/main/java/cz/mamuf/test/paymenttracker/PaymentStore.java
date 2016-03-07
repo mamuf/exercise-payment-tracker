@@ -3,11 +3,13 @@ package cz.mamuf.test.paymenttracker;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import cz.mamuf.test.paymenttracker.model.Payment;
@@ -24,7 +26,8 @@ public class PaymentStore {
 	}
 
 	/**
-	 * Loads all payments from the file.
+	 * Loads all payments from the file. If the file does not exist, returns an
+	 * empty {@link Collection}.
 	 *
 	 * @return Collection of {@link Payment}s.
 	 * @throws IOException When file could not be read.
@@ -38,6 +41,8 @@ public class PaymentStore {
 				result.add(parsePayment(line));
 			}
 			return result;
+		} catch (final FileNotFoundException e) {
+			return Collections.emptyList();
 		}
 	}
 
