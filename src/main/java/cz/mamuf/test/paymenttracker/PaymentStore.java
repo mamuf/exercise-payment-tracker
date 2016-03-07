@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import cz.mamuf.test.paymenttracker.model.Currency;
 import cz.mamuf.test.paymenttracker.model.Payment;
 
 /**
@@ -44,11 +43,8 @@ public class PaymentStore {
 
 	private Payment parsePayment(final String line) {
 		try {
-			final int sepIdx = line.indexOf(' ');
-			final String currencySting = line.substring(0, sepIdx);
-			final String valueString = line.substring(sepIdx + 1);
-			return new Payment(new Currency(currencySting), Integer.parseInt(valueString));
-		} catch (final RuntimeException e) {
+			return Payment.parsePayment(line);
+		} catch (final IllegalArgumentException e) {
 			throw new RuntimeException("Invalid file format, could not parse line '" + line + "': "
 					+ e.getMessage(), e);
 		}

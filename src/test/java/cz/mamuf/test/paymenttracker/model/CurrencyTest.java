@@ -1,67 +1,64 @@
 package cz.mamuf.test.paymenttracker.model;
 
-import java.util.List;
+import static cz.mamuf.test.paymenttracker.TestUtils.arrayWrap;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import java.util.stream.Stream;
+
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.Lists;
 
 public class CurrencyTest {
 
-	private List<String> validCurrencies;
-	private List<String> invalidCurrencies;
-
-	@BeforeMethod
-	public void beforeMethod() {
-		validCurrencies = Lists.newArrayList("CZK", "EUR", "RUB", "GEL", "AZN", "VND", "AAA", "ZZZ");
-		invalidCurrencies = Lists.newArrayList("cZK", "CzK", "CZk", "czK", "cZk", "Czk", "aaa", "zzz", "c", "C", "$",
-				"#$~", "Koruny", "doláče");
+	@DataProvider(name = "validCurrencies")
+	public Object[][] provideValidCurrencies() {
+		return arrayWrap(Stream.of("CZK", "EUR", "RUB", "GEL", "AZN", "VND", "AAA", "ZZZ"));
 	}
 
-	@Test
-	public void testValidCurrency() {
-		validCurrencies.forEach(currency -> new Currency(currency));
+	@DataProvider(name = "invalidCurrencies")
+	public Object[][] provideInvalidCurrencies() {
+		return arrayWrap(Stream.of("cZK", "CzK", "CZk", "czK", "cZk", "Czk", "aaa", "zzz", "c", "C", "$",
+				"#$~", "Koruny", "doláče"));
 	}
 
-	@Test
-	public void testInvalidCurrency() {
-		invalidCurrencies.forEach(invalidCurrency -> {
-			Assert.expectThrows(IllegalArgumentException.class, () -> new Currency(invalidCurrency));
-		});
+	@Test(dataProvider = "validCurrencies")
+	@SuppressWarnings("unused")
+	public void testValidCurrency(final String currency) {
+		new Currency(currency);
 	}
 
-	@Test
-	public void testGetCurrency() {
-		validCurrencies.forEach(currency -> {
-			Assert.assertEquals(new Currency(currency).getCurrency(), currency);
-		});
+	@Test(dataProvider = "invalidCurrencies", expectedExceptions = IllegalArgumentException.class)
+	@SuppressWarnings("unused")
+	public void testInvalidCurrency(final String invalidCurrency) {
+		new Currency(invalidCurrency);
 	}
 
-	@Test
-	public void testEquals() {
-		validCurrencies.forEach(c -> {
-			Assert.assertEquals(new Currency(c), new Currency(c));
-		});
+	@Test(dataProvider = "validCurrencies")
+	public void testGetCurrency(final String currency) {
+		assertEquals(new Currency(currency).getCurrency(), currency);
+	}
+
+	@Test(dataProvider = "validCurrencies")
+	public void testEquals(final String currency) {
+		assertEquals(new Currency(currency), new Currency(currency));
 	}
 
 	@Test
 	public void testNotEquals() {
-		Assert.assertNotEquals(new Currency("CZK"), new Currency("USD"));
+		assertNotEquals(new Currency("CZK"), new Currency("USD"));
 	}
 
-	@Test
-	public void testHashCode() {
-		validCurrencies.forEach(c -> {
-			Assert.assertEquals(new Currency(c).hashCode(), new Currency(c).hashCode());
-		});
+	@Test(dataProvider = "validCurrencies")
+	public void testHashCode(final String currency) {
+		assertEquals(new Currency(currency).hashCode(), new Currency(currency).hashCode());
 	}
 
 	@Test
 	public void testComparable() {
-		Assert.assertEquals(new Currency("CZK").compareTo(new Currency("CZK")), 0, "currencies not equal");
-		Assert.assertTrue(new Currency("AAA").compareTo(new Currency("ZZZ")) < 0, "AAA must be less than ZZZ");
-		Assert.assertTrue(new Currency("ZZZ").compareTo(new Currency("AAA")) > 0, "ZZZ must be more than AAA");
+		assertEquals(new Currency("CZK").compareTo(new Currency("CZK")), 0, "currencies not equal");
+		assertTrue(new Currency("AAA").compareTo(new Currency("ZZZ")) < 0, "AAA must be less than ZZZ");
+		assertTrue(new Currency("ZZZ").compareTo(new Currency("AAA")) > 0, "ZZZ must be more than AAA");
 	}
 }
