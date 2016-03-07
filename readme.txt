@@ -17,3 +17,9 @@ PaymentStore - Bylo by vhodnější, aby metody vyhazovaly potomka výjimky
 PaymentTrackerException namísto IOException, ale pro účely tohoto úkolu je to
 zbytečné. V případě rozšíření programu bych to v rámci refaktoringu zřejmě
 udělal.
+
+ConsoleUI - Uznávám, že to není úplně nejlepší řešení. Bohužel v čisté Javě
+zřejmě nelze snadno kombinovat načítání vstupu uvozené popiskem a průběžný
+výstup. Nepodařilo se mi zařídit to tak, aby uživatel vždy viděl, co napsal,
+a to pohromadě. Pokud dojde k výpisu na výstup uprostřed rozepsaného vstupu,
+vstupní text bude na obrazovce rozdělen.
