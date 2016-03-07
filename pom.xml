@@ -3,7 +3,7 @@
 	<groupId>cz.mamuf</groupId>
 	<artifactId>payment-tracker</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>payment-tracker</name>
 	<url>https://github.com/mamuf/exercise-payment-tracker</url>
 
