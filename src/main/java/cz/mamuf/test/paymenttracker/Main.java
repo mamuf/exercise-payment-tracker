@@ -12,10 +12,13 @@ public class Main {
 			filename = args[0];
 		}
 
-		final PaymentTracker paymentTracker = filename != null
-				? new PaymentTracker(new PaymentStore(new File(filename)))
-				: new PaymentTracker();
-
-		paymentTracker.run();
+		try {
+			final PaymentTracker paymentTracker = filename != null
+					? new PaymentTracker(new PaymentStore(new File(filename)))
+					: new PaymentTracker();
+			paymentTracker.run();
+		} catch (final RuntimeException e) {
+			System.err.println("ERROR: " + e.getMessage());
+		}
 	}
 }

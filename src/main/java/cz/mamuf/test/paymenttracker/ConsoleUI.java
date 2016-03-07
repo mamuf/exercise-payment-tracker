@@ -47,11 +47,11 @@ public class ConsoleUI {
 		while (!terminate.get()) {
 			printInputPrompt();
 			final String input = System.console().readLine();
-			if ("".equals(input)) {
-				continue;
-			} else if (CMD_QUIT.equals(input)) {
+			if (input == null || CMD_QUIT.equals(input)) {
 				terminate.set(true);
-				break;
+				return;
+			} else if (input.isEmpty()) {
+				continue;
 			}
 			handleInput(input);
 		}

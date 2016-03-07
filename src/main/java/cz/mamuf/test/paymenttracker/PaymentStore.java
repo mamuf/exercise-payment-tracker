@@ -50,8 +50,7 @@ public class PaymentStore {
 		try {
 			return Payment.parsePayment(line);
 		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException("Invalid file format, could not parse line '" + line + "': "
-					+ e.getMessage(), e);
+			throw new RuntimeException("Invalid file format, could not parse line: " + e.getMessage(), e);
 		}
 	}
 

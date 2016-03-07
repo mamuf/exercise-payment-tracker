@@ -24,7 +24,8 @@ Ošetření vstupů a chyb
  - Chyby přístupu k souborům nejsou ošetřeny. 
  - Pokud zadaný soubor neexistuje, je vytvořen po zadání první platby. 
  - Pokud již existuje, načtou se stávající záznamy. 
- - Pokud je stávající formát souboru neplatný, program skončí s výjimkou.
+ - Pokud je stávající formát souboru neplatný, program skončí s chybovou
+	hláškou.
 
 
 Poznámky ke kódu
